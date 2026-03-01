@@ -8,9 +8,10 @@ import { GetAllProductsUseCase } from './use-cases/get-all-products.use-case';
 import { GetProductUseCase } from './use-cases/get-product.use-case';
 import { ProductRepository } from './product.repository';
 import { ProductEntity } from './entities/product.entity';
+import { CategoryEntity } from '../categories/entities/category.entity';
 
 @Module({
-  imports: [SequelizeModule.forFeature([ProductEntity])],
+  imports: [SequelizeModule.forFeature([ProductEntity, CategoryEntity])],
   controllers: [ProductsController],
   providers: [
     AddProductUseCase,
