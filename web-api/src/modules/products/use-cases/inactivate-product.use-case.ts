@@ -2,7 +2,7 @@ import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { ProductRepository } from '../product.repository';
 
 @Injectable()
-export class RemoveProductUseCase {
+export class InactivateProductUseCase {
   constructor(private readonly productRepository: ProductRepository) {}
 
   async execute(id: number) {

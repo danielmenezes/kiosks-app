@@ -9,8 +9,8 @@ import {
 } from '@nestjs/common';
 import { AddProductUseCase } from './use-cases/add-product.use-case';
 import { UpdateProductUseCase } from './use-cases/update-product.use-case';
-import { RemoveProductUseCase } from './use-cases/remove-product.use-case';
-import { GetAllProductsUseCase } from './use-cases/get-all-products.use-case';
+import { InactivateProductUseCase } from './use-cases/inactivate-product.use-case';
+import { ListProductsUseCase } from './use-cases/list-products.use-case';
 import { GetProductUseCase } from './use-cases/get-product.use-case';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
@@ -20,8 +20,8 @@ export class ProductsController {
   constructor(
     private readonly addProduct: AddProductUseCase,
     private readonly updateProduct: UpdateProductUseCase,
-    private readonly removeProduct: RemoveProductUseCase,
-    private readonly getAllProducts: GetAllProductsUseCase,
+    private readonly inactivateProduct: InactivateProductUseCase,
+    private readonly listProducts: ListProductsUseCase,
     private readonly getProduct: GetProductUseCase,
   ) {}
 
@@ -32,7 +32,7 @@ export class ProductsController {
 
   @Get('category/:categoryId')
   getByCategory(@Param('categoryId') categoryId: string) {
-    return this.getAllProducts.execute(Number(categoryId));
+    return this.listProducts.execute(Number(categoryId));
   }
 
   @Put(':id')
@@ -46,7 +46,7 @@ export class ProductsController {
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.removeProduct.execute(Number(id));
+  inactivate(@Param('id') id: string) {
+    return this.inactivateProduct.execute(Number(id));
   }
 }
