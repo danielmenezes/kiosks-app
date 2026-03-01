@@ -1,6 +1,8 @@
 import { IsString, IsIn } from 'class-validator';
+import { ApiProperty } from '@nestjs/swagger';
 
 export class UpdateOrderStatusDto {
+  @ApiProperty({ example: 'PAID' })
   @IsString()
   @IsIn([
     'OPEN',
