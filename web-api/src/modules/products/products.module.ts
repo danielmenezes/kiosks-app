@@ -4,6 +4,8 @@ import { ProductsController } from './products.controller';
 import { AddProductUseCase } from './use-cases/add-product.use-case';
 import { UpdateProductUseCase } from './use-cases/update-product.use-case';
 import { RemoveProductUseCase } from './use-cases/remove-product.use-case';
+import { GetAllProductsUseCase } from './use-cases/get-all-products.use-case';
+import { GetProductUseCase } from './use-cases/get-product.use-case';
 import { ProductRepository } from './product.repository';
 import { ProductEntity } from './entities/product.entity';
 
@@ -14,6 +16,8 @@ import { ProductEntity } from './entities/product.entity';
     AddProductUseCase,
     UpdateProductUseCase,
     RemoveProductUseCase,
+    GetAllProductsUseCase,
+    GetProductUseCase,
     ProductRepository,
   ],
 })

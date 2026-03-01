@@ -11,7 +11,7 @@ async function bootstrap() {
 
   if (process.env.NODE_ENV === 'development') {
     const config = new DocumentBuilder()
-      .setTitle('API Entregas')
+      .setTitle('API Kiosks App')
       .setDescription('')
       .setVersion('1.0')
       .addTag('API')
