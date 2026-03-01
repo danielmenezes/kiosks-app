@@ -6,6 +6,7 @@ import { AuthModule } from './modules/auth/auth.module';
 import { UploadModule } from './modules/upload/upload.module';
 import { ProductsModule } from './modules/products/products.module';
 import { CategoriesModule } from './modules/categories/categories.module';
+import { OrdersModule } from './modules/orders/orders.module';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 
@@ -41,6 +42,7 @@ import { join } from 'path';
     // products module added
     ProductsModule,
     CategoriesModule,
+    OrdersModule,
   ],
   controllers: [AppController],
 })
