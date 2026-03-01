@@ -2,32 +2,49 @@
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
-  up: async (queryInterface, Sequelize) => {
+  async up(queryInterface, Sequelize) {
     await queryInterface.createTable(
       {
         schema: 'dbo',
-        tableName: 'terminals',
+        tableName: 'products',
       },
       {
         id: {
           allowNull: false,
-          autoIncrement: false,
+          autoIncrement: true,
           primaryKey: true,
           type: Sequelize.INTEGER,
+        },
+        categoryId: {
+          type: Sequelize.INTEGER,
+          allowNull: false,
+          references: {
+            model: 'categories',
+            key: 'id',
+          },
+          onDelete: 'CASCADE',
         },
         name: {
           type: Sequelize.STRING(100),
           allowNull: false,
           unique: true,
         },
-        password: {
-          type: Sequelize.STRING(100),
+        description: {
+          type: Sequelize.STRING(255),
+          allowNull: true,
+        },
+        price: {
+          type: Sequelize.DECIMAL(10, 2),
           allowNull: false,
         },
         status: {
           type: Sequelize.INTEGER,
           defaultValue: 1,
           allowNull: false,
+        },
+        imageUrl: {
+          type: Sequelize.STRING(255),
+          allowNull: true,
         },
         created_at: {
           allowNull: false,
@@ -41,7 +58,10 @@ module.exports = {
     );
   },
 
-  down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable({ schema: 'dbo', tableName: 'terminals' });
+  async down(queryInterface, Sequelize) {
+    await queryInterface.dropTable({
+      schema: 'dbo',
+      tableName: 'products',
+    });
   },
 };

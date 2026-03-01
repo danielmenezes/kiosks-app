@@ -2,16 +2,16 @@
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
-  up: async (queryInterface, Sequelize) => {
+  async up(queryInterface, Sequelize) {
     await queryInterface.createTable(
       {
         schema: 'dbo',
-        tableName: 'terminals',
+        tableName: 'categories',
       },
       {
         id: {
           allowNull: false,
-          autoIncrement: false,
+          autoIncrement: true,
           primaryKey: true,
           type: Sequelize.INTEGER,
         },
@@ -19,10 +19,6 @@ module.exports = {
           type: Sequelize.STRING(100),
           allowNull: false,
           unique: true,
-        },
-        password: {
-          type: Sequelize.STRING(100),
-          allowNull: false,
         },
         status: {
           type: Sequelize.INTEGER,
@@ -41,7 +37,7 @@ module.exports = {
     );
   },
 
-  down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable({ schema: 'dbo', tableName: 'terminals' });
+  async down(queryInterface, Sequelize) {
+    await queryInterface.dropTable('categories');
   },
 };
