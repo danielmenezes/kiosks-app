@@ -19,7 +19,10 @@ module.exports = {
           type: Sequelize.INTEGER,
           allowNull: false,
           references: {
-            model: 'categories',
+            model: {
+              tableName: 'categories',
+              schema: 'dbo',
+            },
             key: 'id',
           },
           onDelete: 'CASCADE',

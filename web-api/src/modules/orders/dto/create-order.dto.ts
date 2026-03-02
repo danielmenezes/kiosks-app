@@ -24,22 +24,9 @@ class OrderItemDto {
 }
 
 export class CreateOrderDto {
-  @ApiProperty({ example: 1001 })
-  @IsNumber()
-  orderNumber: number;
-
-  @ApiProperty({ example: 1 })
-  @IsNumber()
-  terminalId: number;
-
   @ApiProperty({ type: [OrderItemDto] })
   @IsArray()
   @ValidateNested({ each: true })
   @Type(() => OrderItemDto)
   items: OrderItemDto[];
-
-  @ApiPropertyOptional({ example: 25.5 })
-  @IsOptional()
-  @IsNumber()
-  totalAmount?: number;
 }

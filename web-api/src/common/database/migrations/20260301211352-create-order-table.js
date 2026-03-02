@@ -19,15 +19,6 @@ module.exports = {
           type: Sequelize.INTEGER,
           allowNull: false,
         },
-        terminalId: {
-          type: Sequelize.INTEGER,
-          allowNull: false,
-          references: {
-            model: 'terminals',
-            key: 'id',
-          },
-          onDelete: 'CASCADE',
-        },
         status: {
           type: Sequelize.ENUM(
             'OPEN',
@@ -37,6 +28,7 @@ module.exports = {
             'FINISHED',
             'CANCELLED',
           ),
+          allowNull: false,
           defaultValue: 'OPEN',
         },
         totalAmount: {
@@ -56,8 +48,12 @@ module.exports = {
     );
   },
 
-  async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('orders');
+  async down(queryInterface) {
+    await queryInterface.dropTable({
+      schema: 'dbo',
+      tableName: 'orders',
+    });
+
     await queryInterface.sequelize.query(
       'DROP TYPE IF EXISTS "enum_orders_status";',
     );

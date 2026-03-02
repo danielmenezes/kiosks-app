@@ -19,9 +19,6 @@ export class OrderEntity extends Model<OrderEntity> {
   @Column({ type: DataType.INTEGER, allowNull: false })
   orderNumber: number;
 
-  @Column({ type: DataType.INTEGER, allowNull: false })
-  terminalId: number;
-
   @Column({
     type: DataType.ENUM(
       'OPEN',

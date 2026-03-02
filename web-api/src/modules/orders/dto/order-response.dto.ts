@@ -9,9 +9,6 @@ export class OrderResponseDto {
   orderNumber: number;
 
   @ApiProperty()
-  terminalId: number;
-
-  @ApiProperty()
   status: string;
 
   @ApiProperty()
