@@ -5,6 +5,7 @@ import { Transaction, Op } from 'sequelize';
 import { OrderEntity } from './entities/order.entity';
 import { OrderItemEntity } from './entities/order-item.entity';
 import { ProductEntity } from '../products/entities/product.entity';
+import { StatusOrderEnum } from './types/status-order.enum';
 
 @Injectable()
 export class OrderRepository {
@@ -23,7 +24,7 @@ export class OrderRepository {
     const order = await this.orderEntity.create(
       {
         orderNumber: orderData.orderNumber,
-        status: orderData.status || 'OPEN',
+        status: orderData.status || StatusOrderEnum.OPEN,
         totalAmount: orderData.totalAmount || 0,
       },
       { transaction },

@@ -21,15 +21,15 @@ module.exports = {
         },
         status: {
           type: Sequelize.ENUM(
-            'OPEN',
-            'PENDING_PAYMENT',
-            'PAID',
-            'PREPARING',
-            'FINISHED',
-            'CANCELLED',
+            'open',
+            'pending_payment',
+            'paid',
+            'preparing',
+            'finished',
+            'cancelled',
           ),
           allowNull: false,
-          defaultValue: 'OPEN',
+          defaultValue: 'open',
         },
         totalAmount: {
           type: Sequelize.DECIMAL(10, 2),

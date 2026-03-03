@@ -8,6 +8,7 @@ import {
   HasMany,
 } from 'sequelize-typescript';
 import { OrderItemEntity } from './order-item.entity';
+import { StatusOrderEnum } from '../types/status-order.enum';
 
 @Table({ timestamps: true, schema: 'dbo', tableName: 'orders' })
 export class OrderEntity extends Model<OrderEntity> {
@@ -21,14 +22,14 @@ export class OrderEntity extends Model<OrderEntity> {
 
   @Column({
     type: DataType.ENUM(
-      'OPEN',
-      'PENDING_PAYMENT',
-      'PAID',
-      'PREPARING',
-      'FINISHED',
-      'CANCELLED',
+      StatusOrderEnum.OPEN,
+      StatusOrderEnum.PENDING_PAYMENT,
+      StatusOrderEnum.PAID,
+      StatusOrderEnum.PREPARING,
+      StatusOrderEnum.FINISHED,
+      StatusOrderEnum.CANCELLED,
     ),
-    defaultValue: 'OPEN',
+    defaultValue: StatusOrderEnum.OPEN,
   })
   declare status: string;
 
