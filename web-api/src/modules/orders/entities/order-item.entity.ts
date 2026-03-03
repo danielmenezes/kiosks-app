@@ -20,29 +20,29 @@ export class OrderItemEntity extends Model<OrderItemEntity> {
 
   @ForeignKey(() => OrderEntity)
   @Column({ type: DataType.INTEGER, allowNull: false })
-  orderId: number;
+  declare orderId: number;
 
   @ForeignKey(() => ProductEntity)
   @Column({ type: DataType.INTEGER, allowNull: false })
-  productId: number;
+  declare productId: number;
 
   @Column({ type: DataType.INTEGER, allowNull: false })
-  quantity: number;
+  declare quantity: number;
 
   @Column({ type: DataType.DECIMAL(10, 2), allowNull: false })
-  unitPrice: number;
+  declare unitPrice: number;
 
   @Column({ type: DataType.DECIMAL(10, 2), allowNull: false })
-  totalPrice: number;
+  declare totalPrice: number;
 
   @Column({ type: DataType.TEXT, allowNull: true })
-  notes: string;
+  declare notes: string;
 
   @BelongsTo(() => OrderEntity)
-  order: OrderEntity;
+  declare order: OrderEntity;
 
   @BelongsTo(() => ProductEntity)
-  product: ProductEntity;
+  declare product: ProductEntity;
 
   @Column({ field: 'createdAt', type: DataType.DATE, allowNull: false })
   declare createdAt: Date;

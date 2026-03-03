@@ -17,7 +17,7 @@ export class OrderEntity extends Model<OrderEntity> {
   declare id: number;
 
   @Column({ type: DataType.INTEGER, allowNull: false })
-  orderNumber: number;
+  declare orderNumber: number;
 
   @Column({
     type: DataType.ENUM(
@@ -30,13 +30,13 @@ export class OrderEntity extends Model<OrderEntity> {
     ),
     defaultValue: 'OPEN',
   })
-  status: string;
+  declare status: string;
 
   @Column({ type: DataType.DECIMAL(10, 2), allowNull: false, defaultValue: 0 })
-  totalAmount: number;
+  declare totalAmount: number;
 
   @HasMany(() => OrderItemEntity)
-  items: OrderItemEntity[];
+  declare items: OrderItemEntity[];
 
   @Column({ field: 'createdAt', type: DataType.DATE, allowNull: false })
   declare createdAt: Date;

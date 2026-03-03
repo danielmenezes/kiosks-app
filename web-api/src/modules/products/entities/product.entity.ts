@@ -19,25 +19,25 @@ export class ProductEntity extends Model<ProductEntity> {
 
   @ForeignKey(() => CategoryEntity)
   @Column({ type: DataType.INTEGER, allowNull: false })
-  categoryId: number;
+  declare categoryId: number;
 
   @BelongsTo(() => CategoryEntity)
-  category: CategoryEntity;
+  declare category: CategoryEntity;
 
   @Column({ type: DataType.STRING(100), allowNull: false, unique: true })
-  name: string;
+  declare name: string;
 
   @Column({ type: DataType.STRING(255), allowNull: true })
-  description: string;
+  declare description: string;
 
   @Column({ type: DataType.DECIMAL(10, 2), allowNull: false })
-  price: number;
+  declare price: number;
 
   @Column({ type: DataType.INTEGER, allowNull: false, defaultValue: 1 })
-  status: number;
+  declare status: number;
 
   @Column({ type: DataType.STRING(255), allowNull: true })
-  imageUrl: string;
+  declare imageUrl: string;
 
   @Column({ field: 'created_at', type: DataType.DATE, allowNull: false })
   declare createdAt: Date;

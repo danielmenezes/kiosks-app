@@ -4,7 +4,6 @@ import {
   Model,
   DataType,
   PrimaryKey,
-  AutoIncrement,
 } from 'sequelize-typescript';
 
 @Table({ timestamps: true, schema: 'dbo', tableName: 'terminals' })
@@ -14,13 +13,13 @@ export class TerminalEntity extends Model<TerminalEntity> {
   declare id: number;
 
   @Column({ type: DataType.STRING(), allowNull: false })
-  password: string;
+  declare password: string;
 
   @Column({ type: DataType.STRING(100), allowNull: false, unique: true })
-  name: string;
+  declare name: string;
 
   @Column({ type: DataType.INTEGER, allowNull: false, defaultValue: 1 })
-  status: number;
+  declare status: number;
 
   @Column({ field: 'created_at', type: DataType.DATE, allowNull: false })
   declare createdAt: Date;

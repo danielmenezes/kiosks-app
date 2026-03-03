@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel, InjectConnection } from '@nestjs/sequelize';
 import { Sequelize } from 'sequelize-typescript';
-import { Transaction } from 'sequelize';
+import { Transaction, Op } from 'sequelize';
 import { OrderEntity } from './entities/order.entity';
 import { OrderItemEntity } from './entities/order-item.entity';
 import { ProductEntity } from '../products/entities/product.entity';
@@ -78,16 +78,26 @@ export class OrderRepository {
     id: number,
     status: string,
     transaction?: Transaction,
-  ): Promise<number | [number]> {
+  ): Promise<[number]> {
     return this.orderEntity.update({ status }, { where: { id }, transaction });
   }
 
-  async findLastOrderToday(transaction: Transaction) {
+  async findLastOrderToday(
+    transaction: Transaction,
+  ): Promise<OrderEntity | null> {
+    const startOfDay = new Date();
+    startOfDay.setHours(0, 0, 0, 0);
+
+    const endOfDay = new Date();
+    endOfDay.setHours(23, 59, 59, 999);
+
     return this.orderEntity.findOne({
-      where: this.sequelize.where(
-        this.sequelize.fn('DATE', this.sequelize.col('createdAt')),
-        this.sequelize.fn('CURRENT_DATE'),
-      ),
+      where: {
+        createdAt: {
+          [Op.gte]: startOfDay,
+          [Op.lte]: endOfDay,
+        },
+      },
       order: [['orderNumber', 'DESC']],
       lock: transaction.LOCK.UPDATE,
       transaction,

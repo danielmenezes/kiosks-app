@@ -15,10 +15,10 @@ export class CategoryEntity extends Model<CategoryEntity> {
   declare id: number;
 
   @Column({ type: DataType.STRING(100), allowNull: false, unique: true })
-  name: string;
+  declare name: string;
 
   @Column({ type: DataType.INTEGER, allowNull: false, defaultValue: 1 })
-  status: number;
+  declare status: number;
 
   @Column({ field: 'created_at', type: DataType.DATE, allowNull: false })
   declare createdAt: Date;
