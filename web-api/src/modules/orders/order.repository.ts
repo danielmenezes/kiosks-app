@@ -4,6 +4,7 @@ import { Sequelize } from 'sequelize-typescript';
 import { Transaction } from 'sequelize';
 import { OrderEntity } from './entities/order.entity';
 import { OrderItemEntity } from './entities/order-item.entity';
+import { ProductEntity } from '../products/entities/product.entity';
 
 @Injectable()
 export class OrderRepository {
@@ -47,7 +48,11 @@ export class OrderRepository {
       include: [
         {
           model: OrderItemEntity,
-          include: ['product'],
+          include: [
+            {
+              model: ProductEntity,
+            },
+          ],
         },
       ],
       transaction,
@@ -59,7 +64,11 @@ export class OrderRepository {
       include: [
         {
           model: OrderItemEntity,
-          include: ['product'],
+          include: [
+            {
+              model: ProductEntity,
+            },
+          ],
         },
       ],
     });

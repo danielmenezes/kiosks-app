@@ -1,8 +1,17 @@
 'use strict';
 
+const bcrypt = require('bcrypt');
+
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   up: async (queryInterface, Sequelize) => {
+    const saltRounds = 10;
+
+    const adminPassword = await bcrypt.hash('admin123', saltRounds);
+    const customerPassword = await bcrypt.hash('customer123', saltRounds);
+    const processorPassword = await bcrypt.hash('processor123', saltRounds);
+    const panelPassword = await bcrypt.hash('panel123', saltRounds);
+
     await queryInterface.bulkInsert(
       {
         tableName: 'terminals',
@@ -12,7 +21,7 @@ module.exports = {
         {
           id: 1,
           name: 'admin',
-          password: 'admin123',
+          password: adminPassword,
           status: 1,
           created_at: new Date(),
           updated_at: new Date(),
@@ -20,7 +29,7 @@ module.exports = {
         {
           id: 2,
           name: 'customer',
-          password: 'customer123',
+          password: customerPassword,
           status: 1,
           created_at: new Date(),
           updated_at: new Date(),
@@ -28,7 +37,7 @@ module.exports = {
         {
           id: 3,
           name: 'processor',
-          password: 'processor123',
+          password: processorPassword,
           status: 1,
           created_at: new Date(),
           updated_at: new Date(),
@@ -36,7 +45,7 @@ module.exports = {
         {
           id: 4,
           name: 'panel',
-          password: 'panel123',
+          password: panelPassword,
           status: 1,
           created_at: new Date(),
           updated_at: new Date(),
@@ -45,7 +54,7 @@ module.exports = {
     );
   },
 
-  down: async (queryInterface, Sequelize) => {
+  down: async (queryInterface) => {
     await queryInterface.bulkDelete(
       {
         tableName: 'terminals',
