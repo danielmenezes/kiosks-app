@@ -1,0 +1,36 @@
+import { Injectable } from '@nestjs/common';
+import { InjectModel } from '@nestjs/sequelize';
+import { TerminalEntity } from '../auth/entities/terminal.entity';
+
+@Injectable()
+export class TerminalRepository {
+  constructor(
+    @InjectModel(TerminalEntity)
+    private readonly terminalEntity: typeof TerminalEntity,
+  ) {}
+
+  async getByName(name: string): Promise<TerminalEntity | null> {
+    return this.terminalEntity.findOne({ where: { name } });
+  }
+
+  async findAllNames(): Promise<string[]> {
+    const rows = await this.terminalEntity.findAll({
+      attributes: ['name'],
+      raw: true,
+    });
+    return rows.map((r: any) => r.name);
+  }
+  async getById(id: number): Promise<TerminalEntity | null> {
+    return this.terminalEntity.findByPk(id);
+  }
+
+  async updatePassword(
+    id: number,
+    newPasswordHash: string,
+  ): Promise<number | [number]> {
+    return this.terminalEntity.update(
+      { password: newPasswordHash },
+      { where: { id } },
+    );
+  }
+}

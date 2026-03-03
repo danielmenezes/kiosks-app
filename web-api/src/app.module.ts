@@ -9,6 +9,7 @@ import { CategoriesModule } from './modules/categories/categories.module';
 import { OrdersModule } from './modules/orders/orders.module';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
+import { TerminalsModule } from './modules/terminals/terminals.module';
 
 @Module({
   imports: [
@@ -39,10 +40,10 @@ import { join } from 'path';
     }),
     AuthModule,
     UploadModule,
-    // products module added
     ProductsModule,
     CategoriesModule,
     OrdersModule,
+    TerminalsModule,
   ],
   controllers: [AppController],
 })
