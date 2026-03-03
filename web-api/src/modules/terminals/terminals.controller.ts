@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Req } from '@nestjs/common';
+import { Controller, Get, Post, Body } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiResponse, ApiBody } from '@nestjs/swagger';
 import { ListTerminalsUseCase } from './use-cases/list-terminals.use-case';
 import { ChangeTerminalPasswordUseCase } from './use-cases/change-terminal-password.use-case';
