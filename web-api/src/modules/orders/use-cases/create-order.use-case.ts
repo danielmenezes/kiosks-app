@@ -1,12 +1,14 @@
 import { Injectable } from '@nestjs/common';
-import { Sequelize, Op } from 'sequelize';
+import { Sequelize } from 'sequelize-typescript';
 import { OrderRepository } from '../order.repository';
 import { CreateOrderDto } from '../dto/create-order.dto';
+import { ProductRepository } from '../../products/product.repository';
 
 @Injectable()
 export class CreateOrderUseCase {
   constructor(
     private readonly orderRepository: OrderRepository,
+    private readonly productRepository: ProductRepository,
     private readonly sequelize: Sequelize,
   ) {}
 
@@ -19,12 +21,16 @@ export class CreateOrderUseCase {
 
       const itemsWithPrices = await Promise.all(
         data.items.map(async (it) => {
-          const product = await this.orderRepository.findProductById(
+          const product = await this.productRepository.findById(
             it.productId,
             transaction,
           );
 
-          const unitPrice = product ? Number(product.price) : 0;
+          if (!product) {
+            throw new Error(`Produto ${it.productId} não encontrado`);
+          }
+
+          const unitPrice = Number(product.price);
           const totalPrice = unitPrice * it.quantity;
 
           return { ...it, unitPrice, totalPrice };

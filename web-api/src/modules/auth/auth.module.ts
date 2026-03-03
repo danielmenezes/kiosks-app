@@ -5,7 +5,7 @@ import { JwtStrategy } from 'src/common/jwt/jwt-strategy';
 import { AuthController } from './auth.controller';
 import { TerminalRepository } from './terminal.repository';
 import { TerminalEntity } from './entities/terminal.entity';
-import { SequelizeModule } from '@nestjs/sequelize/dist/sequelize.module';
+import { SequelizeModule } from '@nestjs/sequelize';
 
 @Global()
 @Module({

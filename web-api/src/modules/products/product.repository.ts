@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { ProductEntity } from './entities/product.entity';
-import { Op } from 'sequelize';
+import { Op, Transaction } from 'sequelize';
 
 @Injectable()
 export class ProductRepository {
@@ -37,5 +37,9 @@ export class ProductRepository {
 
   async getById(id: number): Promise<ProductEntity> {
     return this.productEntity.findByPk(id);
+  }
+
+  async findById(id: number, transaction?: Transaction) {
+    return this.productEntity.findByPk(id, { transaction });
   }
 }

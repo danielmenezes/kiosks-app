@@ -1,13 +1,14 @@
 import { Injectable } from '@nestjs/common';
-import { InjectModel } from '@nestjs/sequelize';
-import { Transaction, Sequelize } from 'sequelize';
+import { InjectModel, InjectConnection } from '@nestjs/sequelize';
+import { Sequelize } from 'sequelize-typescript';
+import { Transaction } from 'sequelize';
 import { OrderEntity } from './entities/order.entity';
 import { OrderItemEntity } from './entities/order-item.entity';
-import { ProductEntity } from '../products/entities/product.entity';
 
 @Injectable()
 export class OrderRepository {
   constructor(
+    @InjectConnection()
     private readonly sequelize: Sequelize,
 
     @InjectModel(OrderEntity)
@@ -15,9 +16,6 @@ export class OrderRepository {
 
     @InjectModel(OrderItemEntity)
     private readonly orderItemEntity: typeof OrderItemEntity,
-
-    @InjectModel(ProductEntity)
-    private readonly productEntity: typeof ProductEntity,
   ) {}
 
   async create(orderData: any, transaction: Transaction): Promise<OrderEntity> {
@@ -48,8 +46,8 @@ export class OrderRepository {
     return this.orderEntity.findByPk(id, {
       include: [
         {
-          model: this.orderItemEntity,
-          include: [this.productEntity],
+          model: OrderItemEntity,
+          include: ['product'],
         },
       ],
       transaction,
@@ -60,8 +58,8 @@ export class OrderRepository {
     return this.orderEntity.findAll({
       include: [
         {
-          model: this.orderItemEntity,
-          include: [this.productEntity],
+          model: OrderItemEntity,
+          include: ['product'],
         },
       ],
     });
@@ -85,9 +83,5 @@ export class OrderRepository {
       lock: transaction.LOCK.UPDATE,
       transaction,
     });
-  }
-
-  async findProductById(id: number, transaction: Transaction) {
-    return this.productEntity.findByPk(id, { transaction });
   }
 }

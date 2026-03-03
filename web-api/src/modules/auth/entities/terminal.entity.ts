@@ -10,14 +10,13 @@ import {
 @Table({ timestamps: true, schema: 'dbo', tableName: 'terminals' })
 export class TerminalEntity extends Model<TerminalEntity> {
   @PrimaryKey
-  @AutoIncrement
   @Column(DataType.INTEGER)
   declare id: number;
 
   @Column({ type: DataType.STRING(), allowNull: false })
   password: string;
 
-  @Column({ type: DataType.STRING(100), allowNull: false })
+  @Column({ type: DataType.STRING(100), allowNull: false, unique: true })
   name: string;
 
   @Column({ type: DataType.INTEGER, allowNull: false, defaultValue: 1 })

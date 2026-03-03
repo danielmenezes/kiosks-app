@@ -4,15 +4,17 @@ import { OrdersController } from './orders.controller';
 import { OrderRepository } from './order.repository';
 import { OrderEntity } from './entities/order.entity';
 import { OrderItemEntity } from './entities/order-item.entity';
-import { ProductEntity } from '../products/entities/product.entity';
 import { CreateOrderUseCase } from './use-cases/create-order.use-case';
 import { GetOrderUseCase } from './use-cases/get-order.use-case';
 import { ListOrdersUseCase } from './use-cases/list-orders.use-case';
 import { UpdateOrderStatusUseCase } from './use-cases/update-order-status.use-case';
+import { ProductRepository } from '../products/product.repository';
+import { ProductsModule } from '../products/products.module';
 
 @Module({
   imports: [
-    SequelizeModule.forFeature([OrderEntity, OrderItemEntity, ProductEntity]),
+    ProductsModule,
+    SequelizeModule.forFeature([OrderEntity, OrderItemEntity]),
   ],
   controllers: [OrdersController],
   providers: [
@@ -21,6 +23,7 @@ import { UpdateOrderStatusUseCase } from './use-cases/update-order-status.use-ca
     GetOrderUseCase,
     ListOrdersUseCase,
     UpdateOrderStatusUseCase,
+    ProductRepository,
   ],
 })
 export class OrdersModule {}
