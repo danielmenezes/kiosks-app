@@ -21,6 +21,7 @@ import { CreateCategoryDto } from './dto/create-category.dto';
 import { UpdateCategoryDto } from './dto/update-category.dto';
 import { InactivateCategoryUseCase } from './use-cases/inactivate-category.use-case';
 import { CategoryResponseDto } from './dto/category-response.dto';
+import { Auth } from 'src/common/jwt/auth';
 
 @ApiTags('Categories')
 @Controller('categories')
@@ -33,6 +34,7 @@ export class CategoriesController {
   ) {}
 
   @Post()
+  @Auth()
   @ApiOperation({ summary: 'Create new category' })
   @ApiBody({ type: CreateCategoryDto })
   @ApiResponse({
@@ -45,6 +47,7 @@ export class CategoriesController {
   }
 
   @Get()
+  @Auth()
   @ApiOperation({ summary: 'List active categories' })
   @ApiResponse({
     status: 200,
@@ -57,6 +60,7 @@ export class CategoriesController {
   }
 
   @Put(':id')
+  @Auth()
   @ApiOperation({ summary: 'Update category by ID' })
   @ApiParam({ name: 'id', type: Number })
   @ApiBody({ type: UpdateCategoryDto })
@@ -70,6 +74,7 @@ export class CategoriesController {
   }
 
   @Delete(':id')
+  @Auth()
   @ApiOperation({ summary: 'Inactivate category by ID' })
   @ApiParam({ name: 'id', type: Number })
   @ApiResponse({

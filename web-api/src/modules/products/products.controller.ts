@@ -22,6 +22,7 @@ import { GetProductUseCase } from './use-cases/get-product.use-case';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
 import { ProductResponseDto } from './dto/product-response.dto';
+import { Auth } from 'src/common/jwt/auth';
 
 @ApiTags('Products')
 @Controller('products')
@@ -35,6 +36,7 @@ export class ProductsController {
   ) {}
 
   @Post()
+  @Auth()
   @ApiOperation({ summary: 'Create new product' })
   @ApiBody({ type: CreateProductDto })
   @ApiResponse({ status: 201, type: ProductResponseDto })
@@ -43,6 +45,7 @@ export class ProductsController {
   }
 
   @Get('category/:categoryId')
+  @Auth()
   @ApiOperation({ summary: 'List products by category' })
   @ApiParam({ name: 'categoryId', type: Number })
   @ApiResponse({ status: 200, isArray: true, type: ProductResponseDto })
@@ -51,6 +54,7 @@ export class ProductsController {
   }
 
   @Put(':id')
+  @Auth()
   @ApiOperation({ summary: 'Update existing product' })
   @ApiParam({ name: 'id', type: Number })
   @ApiBody({ type: UpdateProductDto })
@@ -60,6 +64,7 @@ export class ProductsController {
   }
 
   @Get(':id')
+  @Auth()
   @ApiOperation({ summary: 'Get product by ID' })
   @ApiParam({ name: 'id', type: Number })
   @ApiResponse({ status: 200, type: ProductResponseDto })
@@ -68,6 +73,7 @@ export class ProductsController {
   }
 
   @Delete(':id')
+  @Auth()
   @ApiOperation({ summary: 'Inactivate product by ID' })
   @ApiParam({ name: 'id', type: Number })
   @ApiResponse({ status: 200, schema: { example: { success: true } } })

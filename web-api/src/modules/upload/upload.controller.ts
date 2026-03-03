@@ -14,11 +14,13 @@ import {
 import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { extname } from 'path';
+import { Auth } from 'src/common/jwt/auth';
 
 @ApiTags('Upload')
 @Controller('upload')
 export class UploadController {
   @Post('image')
+  @Auth()
   @ApiOperation({ summary: 'Upload image file' })
   @ApiConsumes('multipart/form-data')
   @ApiBody({

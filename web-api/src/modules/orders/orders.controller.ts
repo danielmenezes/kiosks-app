@@ -13,6 +13,7 @@ import { UpdateOrderStatusUseCase } from './use-cases/update-order-status.use-ca
 import { CreateOrderDto } from './dto/create-order.dto';
 import { UpdateOrderStatusDto } from './dto/update-order-status.dto';
 import { OrderResponseDto } from './dto/order-response.dto';
+import { Auth } from 'src/common/jwt/auth';
 
 @ApiTags('Orders')
 @Controller('orders')
@@ -25,6 +26,7 @@ export class OrdersController {
   ) {}
 
   @Post()
+  @Auth()
   @ApiOperation({ summary: 'Create a new order' })
   @ApiBody({ type: CreateOrderDto })
   @ApiResponse({
@@ -37,6 +39,7 @@ export class OrdersController {
   }
 
   @Get()
+  @Auth()
   @ApiOperation({ summary: 'List all orders' })
   @ApiResponse({
     status: 200,
@@ -49,6 +52,7 @@ export class OrdersController {
   }
 
   @Get(':id')
+  @Auth()
   @ApiOperation({ summary: 'Get order by ID' })
   @ApiParam({ name: 'id', type: Number })
   @ApiResponse({
@@ -61,6 +65,7 @@ export class OrdersController {
   }
 
   @Put(':id/status')
+  @Auth()
   @ApiOperation({ summary: 'Update order status' })
   @ApiParam({ name: 'id', type: Number })
   @ApiBody({ type: UpdateOrderStatusDto })
