@@ -13,13 +13,14 @@ export class TerminalRepository {
     return this.terminalEntity.findOne({ where: { name } });
   }
 
-  async findAllNames(): Promise<string[]> {
+  async findAllNames(): Promise<TerminalEntity[]> {
     const rows = await this.terminalEntity.findAll({
-      attributes: ['name'],
+      attributes: ['id', 'name'],
       raw: true,
     });
-    return rows.map((r: any) => r.name);
+    return rows;
   }
+
   async getById(id: number): Promise<TerminalEntity | null> {
     return this.terminalEntity.findByPk(id);
   }

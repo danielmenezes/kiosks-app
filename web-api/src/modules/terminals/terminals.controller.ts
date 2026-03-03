@@ -4,6 +4,7 @@ import { ListTerminalsUseCase } from './use-cases/list-terminals.use-case';
 import { ChangeTerminalPasswordUseCase } from './use-cases/change-terminal-password.use-case';
 import { ChangeTerminalPasswordDto } from './dto/change-terminal-password.dto';
 import { Auth } from 'src/common/jwt/auth';
+import { TerminalResponseDto } from './dto/terminal-reponse.dto';
 
 @ApiTags('Terminals')
 @Controller('terminals')
@@ -19,7 +20,7 @@ export class TerminalsController {
   @ApiResponse({
     status: 200,
     description: 'Array of terminal names',
-    type: String,
+    type: TerminalResponseDto,
     isArray: true,
   })
   list() {
@@ -35,13 +36,9 @@ export class TerminalsController {
     description: 'Operation result',
     schema: { example: { success: true } },
   })
-  changePasswordEndpoint(
-    @Req() req: any,
-    @Body() dto: ChangeTerminalPasswordDto,
-  ) {
-    const terminalId = req.user?.terminalId;
+  changePasswordEndpoint(@Body() dto: ChangeTerminalPasswordDto) {
     return this.changePassword.execute(
-      terminalId,
+      dto.terminalId,
       dto.oldPassword,
       dto.newPassword,
     );
