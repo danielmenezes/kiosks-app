@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
-import { TerminalEntity } from '../auth/entities/terminal.entity';
+import { TerminalEntity } from './entities/terminal.entity';
 
 @Injectable()
 export class TerminalRepository {

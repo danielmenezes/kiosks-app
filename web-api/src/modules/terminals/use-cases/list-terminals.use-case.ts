@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { TerminalRepository } from '../terminal.repository';
-import { TerminalEntity } from 'src/modules/auth/entities/terminal.entity';
+import { TerminalEntity } from 'src/modules/terminals/entities/terminal.entity';
 
 @Injectable()
 export class ListTerminalsUseCase {

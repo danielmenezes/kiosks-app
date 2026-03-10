@@ -3,27 +3,14 @@ import { LoginUseCase } from './use-cases/login.use-case';
 import { JwtModule } from '@nestjs/jwt';
 import { JwtStrategy } from 'src/common/jwt/jwt-strategy';
 import { AuthController } from './auth.controller';
-import { TerminalRepository } from './terminal.repository';
-import { TerminalEntity } from './entities/terminal.entity';
-import { SequelizeModule } from '@nestjs/sequelize';
+import { TerminalRepository } from '../terminals/terminal.repository';
+import { TerminalsModule } from '../terminals/terminals.module';
 
 @Global()
 @Module({
-  imports: [
-    JwtModule.register({}),
-    SequelizeModule.forFeature([TerminalEntity]),
-  ],
+  imports: [JwtModule.register({}), TerminalsModule],
   controllers: [AuthController],
-  providers: [
-    // UseCases
-    LoginUseCase,
-
-    // Repository
-    TerminalRepository,
-
-    // Strategy
-    JwtStrategy,
-  ],
+  providers: [LoginUseCase, TerminalRepository, JwtStrategy],
   exports: [JwtStrategy],
 })
 export class AuthModule {}

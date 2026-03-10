@@ -2,7 +2,7 @@ import { UnauthorizedException, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { LoginDto } from '../dto/login.dto';
 import * as bcrypt from 'bcrypt';
-import { TerminalRepository } from '../terminal.repository';
+import { TerminalRepository } from 'src/modules/terminals/terminal.repository';
 
 @Injectable()
 export class LoginUseCase {
